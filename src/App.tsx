@@ -12,10 +12,26 @@ const MAPS_HUMAYUNPUR = 'https://www.google.com/maps?cid=12885760419563065778'
 const MAPS_B6 = 'https://www.google.com/maps?cid=1185388794796302423'
 
 const categories = [
-  { n: '01', title: ['Ramen'], img: '/images/ramen.webp', alt: 'A bowl of Green Neko ramen' },
-  { n: '02', title: ['Boba', 'Tea'], img: '/images/boba.webp', alt: 'Boba tea with handpicked pearls' },
-  { n: '03', title: ['Poke'], img: '/images/poke.webp', alt: 'A fresh poke bowl' },
-  { n: '04', title: ['Small', 'Plates'], img: '/images/chicken-gyoza.webp', alt: 'Chicken gyoza' },
+  {
+    n: '01', title: 'Ramen', jp: 'ラーメン', kicker: 'Slow broth',
+    desc: 'Rich Kotteri to light Shoyu, simmered six hours or more.',
+    img: '/images/ramen-bowl.webp', alt: 'Shoyu ramen with chashu, soft eggs, naruto and nori',
+  },
+  {
+    n: '02', title: 'Poke', jp: 'ポケ', kicker: 'Fresh bowls',
+    desc: 'Sushi rice, bright vegetables and a protein of your choice.',
+    img: '/images/poke-bowl.webp', alt: 'A poke bowl with chicken, avocado, carrot and red cabbage',
+  },
+  {
+    n: '03', title: 'Boba', jp: 'バブルティー', kicker: 'Drinks',
+    desc: '15+ flavours, organic fruit and handpicked pearls.',
+    img: '/images/boba-trio.webp', alt: 'Four hands holding matcha, milk tea and fruit boba',
+  },
+  {
+    n: '04', title: 'Small Plates', jp: '小皿', kicker: 'To share',
+    desc: 'Gyoza, tempura and little bites for the table.',
+    img: '/images/gyoza-fly.webp', alt: 'Gyoza tumbling through the air with chilli oil and sesame',
+  },
 ]
 
 export default function App() {
@@ -44,12 +60,12 @@ function Hero() {
   return (
     <header className={gutter}>
       <motion.nav
-        className={`flex items-center justify-between pt-[max(16px,calc(var(--u)*2.7))] ${t.nav} font-medium`}
+        className={`grid grid-cols-3 max-sm:grid-cols-[1fr_auto] items-center pt-[max(16px,calc(var(--u)*2.7))] ${t.nav} font-medium`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.1 }}
       >
-        <ul className="flex gap-[max(24px,calc(var(--u)*5.4))]">
+        <ul className="flex justify-self-start gap-[max(24px,calc(var(--u)*5.4))]">
           {[
             ['About', '#about'],
             ['Menu', '#menu'],
@@ -62,7 +78,18 @@ function Hero() {
             </li>
           ))}
         </ul>
-        <span className="text-ink/60">Ramen · Poke · Boba — South Delhi</span>
+        <motion.a
+          href="#"
+          aria-label="Green Neko home"
+          className="block size-[max(28px,calc(var(--u)*2.4))] justify-self-center max-sm:justify-self-end"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease, delay: 0.3 }}
+          whileHover={{ rotate: -8, scale: 1.06 }}
+        >
+          <img src="/images/logo-192.png" alt="" className="size-full" />
+        </motion.a>
+        <span className="justify-self-end text-ink/60 max-sm:hidden">Ramen · Poke · Boba — South Delhi</span>
       </motion.nav>
 
       <div className="mt-[max(20px,calc(var(--u)*3.6))]">
@@ -77,8 +104,8 @@ function Hero() {
         transition={{ duration: 1.3, ease, delay: 0.45 }}
       >
         <motion.img
-          src="/images/cafe-interior.jpg"
-          alt="Inside a Green Neko café"
+          src="/images/hero.webp"
+          alt="The café counter, with Pick Up and Order & Pay Here signs"
           className="absolute inset-0 h-[115%] w-full object-cover"
           style={{ y: imgY }}
           initial={{ scale: 1.15 }}
@@ -162,8 +189,8 @@ function Story() {
         transition={{ duration: 1.3, ease, delay: 0.15 }}
       >
         <motion.img
-          src="/images/matcha-latte.webp"
-          alt="A Green Neko matcha latte"
+          src="/images/matcha-pour.webp"
+          alt="Matcha being poured over iced milk"
           className="absolute inset-0 size-full object-cover"
           initial={{ scale: 1.2 }}
           whileInView={{ scale: 1 }}
@@ -179,72 +206,130 @@ function Story() {
 
 function Categories() {
   return (
-    <section id="categories" className={`${gutter} pt-[max(64px,calc(var(--u)*11))]`}>
-      <h2 className={`${t.display} mx-auto w-fit font-medium`}>
-        <MaskLine className="pl-[0.55em] max-md:pl-0">Ready to serve</MaskLine>
-        <MaskLine delay={0.1}>
-          you <span className="font-bold tracking-[-0.03em] text-leaf">something good.</span>
-        </MaskLine>
-      </h2>
+    <section id="categories" className="pt-[max(64px,calc(var(--u)*11))]">
+      <div className={gutter}>
+        <h2 className={`${t.display} mx-auto w-fit font-semibold`}>
+          <MaskLine className="pl-[0.55em] max-md:pl-0">Ready to serve</MaskLine>
+          <MaskLine delay={0.1}>
+            you <span className="font-bold tracking-[-0.03em] text-leaf">something good.</span>
+          </MaskLine>
+        </h2>
 
-      <Reveal className="mt-[max(32px,calc(var(--u)*7.4))]">
-        <h3 className={`${t.label} font-medium`}>Category</h3>
-      </Reveal>
+        <Reveal className="mt-[max(32px,calc(var(--u)*7.4))]">
+          <h3 className={`${t.label} font-medium`}>Category</h3>
+        </Reveal>
+      </div>
 
-      <ul className="mt-[max(12px,calc(var(--u)*2.2))] grid grid-cols-2 gap-[max(10px,calc(var(--u)*3.4))]">
+      {/* checkerboard: photo | panel | photo | panel, then flipped on the next row */}
+      <ul className="mt-[max(12px,calc(var(--u)*2.2))] grid gap-y-[max(6px,calc(var(--u)*0.6))] md:grid-cols-2">
         {categories.map((c, i) => (
-          <motion.li
-            key={c.n}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-            transition={{ duration: 1, ease, delay: (i % 2) * 0.12 }}
-          >
-            <motion.a
-              href={`${SITE}/menu.html`}
-              className="group relative block aspect-[239/288] overflow-hidden bg-forest text-cream"
-              initial="rest"
-              whileHover="hover"
-              animate="rest"
-            >
-              <motion.img
-                src={c.img}
-                alt={c.alt}
-                loading="lazy"
-                className="absolute inset-0 size-full object-cover"
-                variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
-                transition={{ duration: 0.9, ease }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/30" />
-
-              <div className="absolute right-[max(12px,calc(var(--u)*4.2))] top-[max(12px,calc(var(--u)*3.2))] flex items-start gap-[0.6em]">
-                <span className="mt-[0.9em] text-[max(9px,calc(var(--u)*1.25))] leading-none">({c.n})</span>
-                <span className="text-[max(20px,calc(var(--u)*5))] leading-[0.95] tracking-[-0.02em]">
-                  {c.title.map((line, j) => (
-                    <span key={line} className={`block ${j > 0 ? 'pl-[0.75em]' : ''}`}>
-                      {line}
-                    </span>
-                  ))}
-                </span>
-              </div>
-
-              <span className="absolute bottom-[max(10px,calc(var(--u)*3.2))] left-[max(12px,calc(var(--u)*3.4))] flex items-center gap-[0.35em] text-[max(12px,calc(var(--u)*2.4))] leading-none text-cream/90">
-                view more
-                <motion.span
-                  className="inline-flex"
-                  variants={{ rest: { x: 0 }, hover: { x: 6 } }}
-                  transition={{ duration: 0.5, ease }}
-                >
-                  <Arrow className="size-[0.55em]" />
-                </motion.span>
-              </span>
-            </motion.a>
-          </motion.li>
+          <CategoryTile key={c.n} c={c} mobileFlip={i % 2 === 1} deskFlip={i >= 2} />
         ))}
       </ul>
     </section>
   )
 }
+
+function CategoryTile({
+  c,
+  mobileFlip,
+  deskFlip,
+}: {
+  c: (typeof categories)[number]
+  mobileFlip: boolean
+  deskFlip: boolean
+}) {
+  const photoOrder = `${mobileFlip ? 'order-2' : 'order-1'} ${deskFlip ? 'md:order-2' : 'md:order-1'}`
+  const panelOrder = `${mobileFlip ? 'order-1' : 'order-2'} ${deskFlip ? 'md:order-1' : 'md:order-2'}`
+
+  return (
+    <li>
+      <motion.a
+        href="#menu"
+        className="grid aspect-[2/1.2] grid-cols-2 text-cream"
+        initial="rest"
+        whileHover="hover"
+        animate="rest"
+      >
+        <motion.div
+          className={`relative overflow-hidden bg-forest ${photoOrder}`}
+          initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
+          whileInView={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+          viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+          transition={{ duration: 1.2, ease }}
+        >
+          <motion.img
+            src={c.img}
+            alt={c.alt}
+            loading="lazy"
+            className="absolute inset-0 size-full object-cover"
+            variants={{ rest: { scale: 1 }, hover: { scale: 1.07 } }}
+            transition={{ duration: 0.9, ease }}
+          />
+        </motion.div>
+
+        <motion.div
+          className={`flex flex-col justify-between bg-forest p-[max(16px,calc(var(--u)*2.8))] ${panelOrder}`}
+          initial="hidden"
+          whileInView="shown"
+          viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+          variants={{ shown: { transition: { staggerChildren: 0.07, delayChildren: 0.2 } } }}
+        >
+          <motion.div
+            variants={fadeUp}
+            transition={{ duration: 0.8, ease }}
+            className="flex items-start justify-between text-[max(9px,calc(var(--u)*1.1))] font-medium leading-none text-cream/60"
+          >
+            <span>({c.n})</span>
+            <span>{c.jp}</span>
+          </motion.div>
+
+          <div>
+            <motion.h4
+              variants={fadeUp}
+              transition={{ duration: 0.8, ease }}
+              className="text-[max(22px,calc(var(--u)*3.2))] font-bold uppercase leading-[0.95] tracking-[-0.03em]"
+            >
+              {c.title}
+            </motion.h4>
+            <motion.p
+              variants={fadeUp}
+              transition={{ duration: 0.8, ease }}
+              className="mt-[0.4em] text-[max(13px,calc(var(--u)*1.4))] italic text-cream/70"
+            >
+              {c.kicker}
+            </motion.p>
+            <motion.p
+              variants={fadeUp}
+              transition={{ duration: 0.8, ease }}
+              className={`${t.small} mt-[max(10px,calc(var(--u)*1.6))] max-w-[30ch] text-cream/65 max-sm:hidden`}
+            >
+              {c.desc}
+            </motion.p>
+
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.8, ease }}
+              className="mt-[max(14px,calc(var(--u)*2.2))] flex items-center gap-[0.7em] text-[max(12px,calc(var(--u)*1.3))] font-medium"
+            >
+              <span>view more</span>
+              <span aria-hidden className="relative -top-[0.1em] flex-1 border-b border-dotted border-cream/35" />
+              <motion.span
+                className="inline-flex"
+                variants={{ rest: { x: 0 }, hover: { x: 6 } }}
+                transition={{ duration: 0.5, ease }}
+              >
+                <Arrow className="size-[0.85em]" />
+              </motion.span>
+            </motion.div>
+          </div>
+        </motion.div>
+      </motion.a>
+    </li>
+  )
+}
+
+const fadeUp = { hidden: { opacity: 0, y: 14 }, shown: { opacity: 1, y: 0 } }
 
 /* ───────────────────────── Gallery ───────────────────────── */
 
@@ -274,19 +359,19 @@ function Gallery() {
               <Arcs className="w-[max(48px,calc(var(--u)*12.8))] text-leaf" />
             </Reveal>
             <GalleryImage
-              src="/images/cafe-interior.jpg"
-              alt="Tables by the window at Green Neko"
+              src="/images/hero.webp"
+              alt="Espresso grinder and plants by the window"
               className="h-[max(110px,calc(var(--u)*20.7))] w-full"
               y={sideY}
-              objectPosition="20% 50%"
+              objectPosition="18% 55%"
             />
           </div>
         </div>
 
         {/* center column */}
         <GalleryImage
-          src="/images/neko-souffle-pancake.webp"
-          alt="Neko soufflé pancakes"
+          src="/images/pancake-stack.webp"
+          alt="Pancake stack with blueberries, cream and caramel in afternoon light"
           className="w-[46.7%] max-md:aspect-[3/4] max-md:w-full"
           y={centerY}
           delay={0.1}
@@ -295,8 +380,8 @@ function Gallery() {
         {/* right column */}
         <div className="flex w-[25.9%] flex-col justify-between max-md:w-full max-md:flex-row max-md:items-end max-md:gap-6">
           <GalleryImage
-            src="/images/shrimp-tempura.webp"
-            alt="Shrimp tempura"
+            src="/images/shrimp-tempura-bowl.webp"
+            alt="Shrimp tempura with dipping sauce"
             className="h-[max(160px,calc(var(--u)*34))] w-full max-md:w-[48%] max-md:shrink-0"
             y={sideY}
             delay={0.2}
