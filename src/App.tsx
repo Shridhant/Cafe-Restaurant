@@ -167,11 +167,12 @@ function Story() {
         viewport={{ once: true, margin: '0px 0px -15% 0px' }}
         transition={{ duration: 1, ease }}
       >
-        <h2 className="text-[max(20px,calc(var(--u)*2.9))] font-semibold leading-[1.3] tracking-[-0.01em]">
-          <MaskLine delay={0.2}>Made with intention</MaskLine>
-          <MaskLine delay={0.3} className="pl-[1.6em]">
-            served with love
+        {/* headline top-right, note bottom-left: the two read as a diagonal across the panel */}
+        <h2 className="self-end text-right text-[max(20px,calc(var(--u)*2.9))] font-semibold leading-[1.3] tracking-[-0.01em]">
+          <MaskLine delay={0.2} className="pr-[1.6em]">
+            Made with intention
           </MaskLine>
+          <MaskLine delay={0.3}>served with love</MaskLine>
         </h2>
         <Reveal delay={0.4} y={12}>
           <p className={`${t.small} max-w-[max(180px,calc(var(--u)*16))] text-cream/90`}>
